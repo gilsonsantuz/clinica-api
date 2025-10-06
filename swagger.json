@@ -1,0 +1,45 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Clínica de Fisioterapia",
+    "version": "1.0.0",
+    "description": "API para gerenciamento de pacientes, profissionais e agendamentos."
+  },
+  "paths": {
+    "/patients": {
+      "post": { "tags": ["Patients"], "summary": "Cadastra um novo paciente", "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PatientInput" } } } }, "responses": { "201": { "description": "Paciente criado" } } },
+      "get": { "tags": ["Patients"], "summary": "Lista todos os pacientes", "responses": { "200": { "description": "OK" } } }
+    },
+    "/patients/{id}": {
+      "get": { "tags": ["Patients"], "summary": "Busca um paciente pelo ID", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "200": { "description": "OK" } } },
+      "put": { "tags": ["Patients"], "summary": "Atualiza um paciente", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "requestBody": { "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PatientInput" } } } }, "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["Patients"], "summary": "Deleta um paciente", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "204": { "description": "Deletado com sucesso" } } }
+    },
+    "/professionals": {
+      "post": { "tags": ["Professionals"], "summary": "Cadastra um novo profissional", "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ProfessionalInput" } } } }, "responses": { "201": { "description": "Profissional criado" } } },
+      "get": { "tags": ["Professionals"], "summary": "Lista todos os profissionais", "responses": { "200": { "description": "OK" } } }
+    },
+    "/professionals/{id}": {
+      "get": { "tags": ["Professionals"], "summary": "Busca um profissional pelo ID", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "200": { "description": "OK" } } },
+      "put": { "tags": ["Professionals"], "summary": "Atualiza um profissional", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "requestBody": { "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ProfessionalInput" } } } }, "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["Professionals"], "summary": "Deleta um profissional", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "204": { "description": "Deletado com sucesso" } } }
+    },
+    "/appointments": {
+      "post": { "tags": ["Appointments"], "summary": "Cria um novo agendamento", "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppointmentInput" } } } }, "responses": { "201": { "description": "Agendamento criado" } } },
+      "get": { "tags": ["Appointments"], "summary": "Lista todos os agendamentos", "responses": { "200": { "description": "OK" } } }
+    },
+    "/appointments/{id}": {
+      "get": { "tags": ["Appointments"], "summary": "Busca um agendamento pelo ID", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "200": { "description": "OK" } } },
+      "put": { "tags": ["Appointments"], "summary": "Atualiza um agendamento", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "requestBody": { "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppointmentUpdateInput" } } } }, "responses": { "200": { "description": "OK" } } },
+      "delete": { "tags": ["Appointments"], "summary": "Deleta um agendamento", "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }], "responses": { "204": { "description": "Deletado com sucesso" } } }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PatientInput": { "type": "object", "properties": { "name": { "type": "string", "example": "João da Silva" }, "email": { "type": "string", "example": "joao.silva@email.com" }, "phone": { "type": "string", "example": "11987654321" } } },
+      "ProfessionalInput": { "type": "object", "properties": { "name": { "type": "string", "example": "Dr. Carlos Andrade" }, "specialty": { "type": "string", "example": "Fisioterapia Ortopédica" } } },
+      "AppointmentInput": { "type": "object", "properties": { "appointmentDate": { "type": "string", "format": "date-time", "example": "2025-10-10T14:00:00Z" }, "patientId": { "type": "integer", "example": 1 }, "professionalId": { "type": "integer", "example": 1 } } },
+      "AppointmentUpdateInput": { "type": "object", "properties": { "appointmentDate": { "type": "string", "format": "date-time", "example": "2025-10-10T15:30:00Z" } } }
+    }
+  }
+}
